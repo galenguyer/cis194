@@ -4,7 +4,7 @@ github:              "galenguyer/cis194"
 license:             BSD3
 author:              "Galen Guyer"
 maintainer:          "galen@galenguyer.com"
-copyright:           "Galen Guyer"
+copyright:           "2022 Galen Guyer"
 
 extra-source-files:
 - README.md
@@ -21,21 +21,13 @@ description:         Please see the README on GitHub at <https://github.com/gale
 
 dependencies:
 - base >= 4.7 && < 5
-- tasty >= 1.4
+- tasty >= 1.4 && < 1.5
+- tasty-hunit > 0.10 && < 0.11
+- tasty-quickcheck > 0.10 && < 0.11
+- tasty-smallcheck > 0.8 && < 0.9
 
 library:
   source-dirs: src
-
-executables:
-  cis194-exe:
-    main:                Main.hs
-    source-dirs:         app
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - cis194
 
 tests:
   cis194-test:
