@@ -14,7 +14,7 @@ tests :: TestTree
 tests = testGroup "Tests" [hw1]
 
 hw1 :: TestTree
-hw1 = testGroup "HW1" [hw1ToDigits, hw1ToDigitsRev, hw1DoubleEveryOther, hw1SumDigits]
+hw1 = testGroup "HW1" [hw1ToDigits, hw1ToDigitsRev, hw1DoubleEveryOther, hw1SumDigits, hw1Validate]
     
 
 hw1ToDigits :: TestTree
@@ -45,6 +45,14 @@ hw1SumDigits :: TestTree
 hw1SumDigits = testGroup "sumDigits"
     [ testCase "[16,7,12,5]" $
         sumDigits [16,7,12,5] @?= 22
+    ]
+
+hw1Validate :: TestTree
+hw1Validate = testGroup "validate"
+    [ testCase "4012888888881881" $
+        validate 4012888888881881 @?= True
+    , testCase "4012888888881882" $
+        validate 4012888888881882 @?= False
     ]
 
 -- properties :: TestTree

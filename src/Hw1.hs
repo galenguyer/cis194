@@ -2,15 +2,21 @@ module Hw1
     ( toDigits,
     toDigitsRev,
     doubleEveryOther,
-    sumDigits
+    sumDigits,
+    validate
     ) where
 
 toDigits :: Integer -> [Integer]
-toDigits 0 = []
 toDigits n
+    | n < 1         = []
+    | n < 10        = [n]
+    | otherwise     = digits n
+
+digits :: Integer -> [Integer]
+digits n
     | n < 0         = []
     | n < 10        = [n]
-    | otherwise     = toDigits (div n 10) ++ toDigits (mod n 10)
+    | otherwise     = digits (div n 10) ++ digits (mod n 10)
 
 toDigitsRev :: Integer -> [Integer]
 toDigitsRev n = (reverse . toDigits) n
@@ -27,5 +33,9 @@ sumDigits :: [Integer] -> Integer
 sumDigits [] = 0
 sumDigits (x:[])
     | x < 10    = x
-    | otherwise = (sumDigits . toDigits) x
-sumDigits (x:ys) = (sumDigits . toDigits) x + sumDigits ys
+    | otherwise = sumDigits [(div x 10)] + (mod x 10)
+sumDigits (x:ys) = (sumDigits [x]) + sumDigits ys
+
+validate :: Integer -> Bool
+validate n = do
+    (mod ((sumDigits . doubleEveryOther . toDigits) n) 10) == 0
