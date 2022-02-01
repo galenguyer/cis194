@@ -14,7 +14,7 @@ tests :: TestTree
 tests = testGroup "Tests" [hw1]
 
 hw1 :: TestTree
-hw1 = testGroup "HW1" [hw1ToDigits, hw1ToDigitsRev, hw1DoubleEveryOther]
+hw1 = testGroup "HW1" [hw1ToDigits, hw1ToDigitsRev, hw1DoubleEveryOther, hw1SumDigits]
     
 
 hw1ToDigits :: TestTree
@@ -39,6 +39,12 @@ hw1DoubleEveryOther = testGroup "doubleEveryOther"
         doubleEveryOther [8,7,6,5] @?= [16,7,12,5]
     , testCase "[1,2,3]" $
         doubleEveryOther [1,2,3] @?= [1,4,3]
+    ]
+
+hw1SumDigits :: TestTree
+hw1SumDigits = testGroup "sumDigits"
+    [ testCase "[16,7,12,5]" $
+        sumDigits [16,7,12,5] @?= 22
     ]
 
 -- properties :: TestTree

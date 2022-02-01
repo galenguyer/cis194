@@ -24,4 +24,8 @@ doubleEveryOther (x:y:zs)
     | otherwise                 = x : (y * 2) : (doubleEveryOther zs)
 
 sumDigits :: [Integer] -> Integer
-sumDigits = undefined
+sumDigits [] = 0
+sumDigits (x:[])
+    | x < 10    = x
+    | otherwise = (sumDigits . toDigits) x
+sumDigits (x:ys) = (sumDigits . toDigits) x + sumDigits ys
