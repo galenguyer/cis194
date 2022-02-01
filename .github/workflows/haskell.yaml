@@ -1,0 +1,16 @@
+name: Haskell CI
+on:
+  push:
+    branches: [ main ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: haskell/actions/setup@v1
+      with:
+        ghc-version: '8.10.7' # Exact version of ghc to use
+        enable-stack: true
+        stack-version: '2.7.3'
+    - name: Run tests
+      run: stack test
