@@ -14,8 +14,10 @@ tests :: TestTree
 tests = testGroup "Tests" [hw1]
 
 hw1 :: TestTree
-hw1 = testGroup "HW1" [hw1ToDigits, hw1ToDigitsRev, hw1DoubleEveryOther, hw1SumDigits, hw1Validate]
-    
+hw1 = testGroup "HW1" [creditCard]
+
+creditCard :: TestTree
+creditCard = testGroup "Credit Card" [hw1ToDigits, hw1ToDigitsRev, hw1DoubleEveryOther, hw1SumDigits, hw1Validate]
 
 hw1ToDigits :: TestTree
 hw1ToDigits = testGroup "toDigits"
