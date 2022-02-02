@@ -14,7 +14,7 @@ tests :: TestTree
 tests = testGroup "Tests" [hw1]
 
 hw1 :: TestTree
-hw1 = testGroup "HW1" [creditCard]
+hw1 = testGroup "HW1" [creditCard, hw1Hanoi]
 
 creditCard :: TestTree
 creditCard = testGroup "Credit Card" [hw1ToDigits, hw1ToDigitsRev, hw1DoubleEveryOther, hw1SumDigits, hw1Validate]
@@ -57,6 +57,11 @@ hw1Validate = testGroup "validate"
         validate 4012888888881882 @?= False
     ]
 
+hw1Hanoi :: TestTree
+hw1Hanoi = testGroup "hanoi"
+    [ testCase "2 \"a\" \"b\" \"c\"" $
+        hanoi 2 "a" "b" "c" @?= [("a", "c"), ("a", "b"), ("c", "b")]
+    ]
 -- properties :: TestTree
 -- properties = testGroup "Properties" [scProps, qcProps]
 

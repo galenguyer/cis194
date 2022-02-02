@@ -3,7 +3,10 @@ module Hw1
     toDigitsRev,
     doubleEveryOther,
     sumDigits,
-    validate
+    validate,
+    Move,
+    Peg,
+    hanoi
     ) where
 
 toDigits :: Integer -> [Integer]
@@ -39,3 +42,11 @@ sumDigits (x:ys) = (sumDigits [x]) + sumDigits ys
 validate :: Integer -> Bool
 validate n = do
     (mod ((sumDigits . doubleEveryOther . toDigits) n) 10) == 0
+
+type Peg = String
+type Move = (Peg, Peg)
+hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
+hanoi n source dest aux
+    | n == 1        = [(source, dest)]
+    | otherwise = do
+        hanoi (n - 1) source aux dest ++ [(source, dest)] ++ hanoi (n - 1) aux dest source
