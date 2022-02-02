@@ -22,26 +22,26 @@ digits n
     | otherwise     = digits (div n 10) ++ digits (mod n 10)
 
 toDigitsRev :: Integer -> [Integer]
-toDigitsRev n = (reverse . toDigits) n
+toDigitsRev = reverse . toDigits
 
 doubleEveryOther :: [Integer] -> [Integer]
 doubleEveryOther [] = []
-doubleEveryOther (x:[]) = [x]
-doubleEveryOther (x:y:[]) = (x * 2) : y : []
+doubleEveryOther [x] = [x]
+doubleEveryOther [x,y] = [x * 2, y]
 doubleEveryOther (x:y:zs)
-    | mod (length zs) 2 == 0    = (x * 2) : y : (doubleEveryOther zs)  
-    | otherwise                 = x : (y * 2) : (doubleEveryOther zs)
+    | even (length zs)    = (x * 2) : y : doubleEveryOther zs
+    | otherwise                 = x : (y * 2) : doubleEveryOther zs
 
 sumDigits :: [Integer] -> Integer
 sumDigits [] = 0
-sumDigits (x:[])
+sumDigits [x]
     | x < 10    = x
-    | otherwise = sumDigits [(div x 10)] + (mod x 10)
-sumDigits (x:ys) = (sumDigits [x]) + sumDigits ys
+    | otherwise = sumDigits [div x 10] + mod x 10
+sumDigits (x:ys) = sumDigits [x] + sumDigits ys
 
 validate :: Integer -> Bool
 validate n = do
-    (mod ((sumDigits . doubleEveryOther . toDigits) n) 10) == 0
+    mod ((sumDigits . doubleEveryOther . toDigits) n) 10 == 0
 
 type Peg = String
 type Move = (Peg, Peg)
